@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>بَصِير</title>
+<style>
+:root{--bg:#06163a;--bg2:#0a2a5e;--tq:#2dd4bf;--tq2:#14b8a6;--tx:#fff;--card:#0d3270;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#06163a}}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--tx);font-family:Tahoma,"Segoe UI",Arial,sans-serif}
+body{background:linear-gradient(160deg,var(--bg),var(--bg2))}
+.scr{display:none;min-height:100vh;padding:18px;flex-direction:column;align-items:center}
+.scr.on{display:flex}
+#splash{justify-content:center;text-align:center;position:fixed;inset:0;z-index:9;background:radial-gradient(circle at 50% 35%,#0e4a8f,#06163a 70%);overflow:hidden}
+.bub{position:absolute;border-radius:50%;background:var(--tq);opacity:.15;animation:fl 6s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-30px) scale(1.1)}}
+@keyframes pu{50%{transform:scale(1.08)}}
+.logo{animation:pu 2s infinite}
+h1{font-size:54px;margin:8px 0;color:var(--tq)}
+p.sub{font-size:20px;opacity:.9;margin:4px}
+input{width:100%;max-width:420px;font-size:22px;padding:16px;border-radius:16px;border:3px solid var(--tq);background:#082252;color:#fff;margin:8px 0}
+button{font-family:inherit;cursor:pointer}
+.big{width:100%;max-width:420px;font-size:26px;font-weight:bold;padding:20px;border-radius:20px;border:0;background:var(--tq);color:#06163a;margin:8px 0}
+.big.alt{background:transparent;border:3px solid var(--tq);color:var(--tq)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:520px}
+.t{background:var(--card);border:3px solid var(--tq2);border-radius:22px;padding:18px 8px;font-size:21px;font-weight:bold;color:#fff;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.t span{font-size:38px}
+.t:active,.big:active{transform:scale(.96)}
+.sos{background:#c1121f;border-color:#fff;grid-column:1/3;min-height:96px;font-size:28px}
+.mic{width:130px;height:130px;border-radius:50%;border:6px solid #fff;background:var(--tq);font-size:56px;margin:10px 0}
+.mic.live{animation:pu 1s infinite;background:#ff6b6b}
+#said{min-height:60px;font-size:22px;text-align:center;background:#082252;border-radius:16px;padding:12px;width:100%;max-width:520px;margin:6px 0;border:2px dashed var(--tq)}
+video{width:100%;max-width:520px;border-radius:20px;border:4px solid var(--tq);background:#000}
+.back{align-self:flex-start;background:none;border:2px solid var(--tq);color:var(--tq);font-size:20px;padding:10px 18px;border-radius:14px;margin-bottom:8px}
+h2{color:var(--tq);font-size:30px;margin:8px 0}
+.note{background:var(--card);padding:12px;border-radius:12px;margin:6px 0;font-size:20px;width:100%;max-width:520px}
+</style>
+<style>
+body{background:#eef3f9;color:#0a1f44}
+#splash{color:#fff}#login{background:linear-gradient(160deg,#06163a,#0a2a5e);color:#fff}
+#side{display:none;position:fixed;top:0;right:0;bottom:0;width:230px;background:#08183a;flex-direction:column;padding:18px 12px;gap:6px;z-index:5;overflow:auto}
+body.in #side{display:flex}
+.br{display:flex;align-items:center;gap:10px;padding:6px 6px 18px}
+.br i{width:44px;height:44px;border-radius:12px;background:var(--tq);display:grid;place-items:center;font-style:normal;font-size:22px;color:#06163a}
+.br b{font-size:22px;color:#fff;display:block}.br small{color:#9fb3d1;font-size:12px}
+#side button{background:none;border:0;color:#cfe0f5;font-size:17px;text-align:right;padding:14px;border-radius:12px}
+#side button:hover{background:#15305e;color:#fff}
+body.in .scr:not(#splash){margin-right:230px}
+#home{align-items:stretch}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.hd h2{color:#0a1f44;font-size:28px;margin:0}.hd p{margin:4px 0 0;color:#64748b}
+.usr{background:#fff;padding:8px 14px;border-radius:14px;font-size:14px;text-align:right}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#0b2447,#0d4a6b 60%,#0f6f7a);border-radius:24px;padding:30px;color:#fff;text-align:right;margin:8px 0 16px}
+.hero:before{content:"";position:absolute;left:44px;top:50%;width:70px;height:70px;margin-top:-35px;border-radius:50%;background:var(--tq);box-shadow:0 0 0 14px #2dd4bf33,0 0 0 30px #2dd4bf1a}
+.bd{background:#ffffff22;padding:4px 12px;border-radius:20px;font-size:13px}
+.hero h3{font-size:30px;margin:12px 0 6px}.hero p{margin:0 0 16px;opacity:.85}
+.hb{position:relative;background:var(--tq);color:#06163a;border:0;border-radius:14px;padding:14px 26px;font-size:20px;font-weight:bold}
+.hb.live{background:#ff6b6b;animation:pu 1s infinite}
+#home h4{font-size:22px;margin:6px 0 10px;color:#0a1f44}
+#said{max-width:none;background:#fff;color:#0a1f44}
+#home .grid{max-width:none;grid-template-columns:repeat(4,1fr);gap:16px}
+.t{background:#fff;border:0;box-shadow:0 2px 10px #0a1f4414;color:#0a1f44;align-items:flex-start;justify-content:flex-start;text-align:right;padding:16px;min-height:150px;font-size:18px}
+.t span{align-self:flex-end;width:44px;height:44px;border-radius:12px;background:#eef3f9;display:grid;place-items:center;font-size:24px;margin-bottom:auto}
+.t small{font-weight:normal;color:#64748b;font-size:13px}
+.t.sos{background:#c1121f;color:#fff;grid-column:1/-1;min-height:90px}.t.sos span{background:#ffffff33}
+h2{color:#0f766e}.back{color:#0f766e;border-color:#0f766e}.note{background:#fff;color:#0a1f44}
+.scr:not(#login):not(#splash) .big.alt{color:#0f766e;border-color:#0f766e}
+@media(max-width:820px){#side{position:static;width:100%;flex-direction:row;padding:8px;overflow-x:auto}.br{display:none}#side button{white-space:nowrap;font-size:15px;padding:10px}body.in .scr:not(#splash){margin-right:0}#home .grid{grid-template-columns:1fr 1fr}.hd{flex-direction:column;align-items:flex-start}.hero:before{display:none}}
+</style>
+</head>
+<body>
+<aside id="side"><div class="br"><i>◉</i><div><b>بصير</b><small>مساعدك اليومي الذكي</small></div></div><button data-a="home">🏠 الرئيسية</button><button data-a="obj">📷 الكاميرا والتعرّف</button><button data-a="txt">📖 قارئ النصوص</button><button data-a="near">📍 التنقل والموقع</button><button data-a="notes">📝 ملاحظاتي</button><button data-a="voice">🎤 المساعد الصوتي</button><button data-a="med">💊 مواعيد الدواء</button><button data-a="fam">👨‍👩‍👧 لوحة الأهل</button><button id="ex">🗣️ وضع الشرح: شغال</button></aside>
+
+<div id="splash" class="scr on" role="button" aria-label="اضغط عشان نبدأ">
+  <div class="bub" style="width:180px;height:180px;top:6%;right:-40px"></div>
+  <div class="bub" style="width:110px;height:110px;bottom:12%;left:8%;animation-delay:1s"></div>
+  <div class="bub" style="width:70px;height:70px;top:40%;left:10%;animation-delay:2s"></div>
+  <svg class="logo" width="170" height="110" viewBox="0 0 170 110"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#14b8a6"/></linearGradient></defs><circle cx="85" cy="55" r="41" fill="none" stroke="url(#lg)" stroke-width="5" opacity="0.55"/><circle cx="85" cy="55" r="34" fill="none" stroke="url(#lg)" stroke-width="5.5"/><circle cx="85" cy="55" r="25" fill="url(#lg)"/><circle cx="85" cy="55" r="13" fill="#06163a"/><circle cx="92" cy="47" r="4.5" fill="#fff" opacity="0.95"/></svg>
+  <h1>بَصِير</h1>
+  <p class="sub">عينك في كل مكان</p>
+  <p class="sub" style="color:#2dd4bf">دوس في أي مكان عشان نبدأ</p>
+</div>
+
+<div id="login" class="scr">
+  <h1 style="font-size:40px">أهلاً بيك</h1>
+  <p class="sub">سجّل دخولك</p>
+  <input id="nm" placeholder="اسمك" aria-label="اسمك" autocomplete="name">
+  <input id="pw" type="password" placeholder="الرقم السري" aria-label="الرقم السري">
+  <input id="fam" type="tel" placeholder="رقم موبايل حد من أهلك (للطوارئ)" aria-label="رقم الطوارئ">
+  <button class="big" id="go">دخول</button>
+  <button class="big alt" id="guest">ادخل من غير حساب</button>
+  <button class="big alt" id="vl">🎤 قول اسمك بصوتك</button>
+  <button class="big" id="loginVoice" aria-label="سجّل الدخول بالصوت: قول اسمك عشان تدخل">🎤 سجّل الدخول بصوتك</button>
+</div>
+
+<div id="home" class="scr">
+  <span id="hi" hidden></span><div class="hd"><div><h2 id="gr">مساء الخير يا صديقي 👋</h2><p>أنا بصير، معاك خطوة بخطوة. أقدر أساعدك إزاي؟</p></div><div class="usr"><b id="un">مستخدم بصير</b><br><small>وضع الوصول مفعّل</small></div></div><div class="hero"><span class="bd">✦ المساعد الذكي متاح الآن</span><h3>يومك أسهل مع بصير</h3><p>قول لي اللي محتاجه، وأنا هساعدك.</p><button class="hb" id="mic" aria-label="ابدأ التحدث">🎤 ابدأ التحدث</button></div>
+  
+  <div id="said">قول: «طقس» أو «نقود» أو «طوارئ» أو «أقرب حمّام»</div><h4>عايز تعمل إيه؟</h4>
+  <div class="grid">
+    <button class="t sos" data-a="sos"><span>🚨</span>طوارئ – اتصل بأهلي</button>
+    <button class="t" data-a="obj"><span>👁️</span>تعرّف على الأشياء</button>
+    <button class="t" data-a="cur"><span>💵</span>الفلوس</button>
+    <button class="t" data-a="prod"><span>🧴</span>قراءة المنتجات</button>
+    <button class="t" data-a="txt"><span>📖</span>قراءة النصوص</button>
+    <button class="t" data-a="near"><span>📍</span>أماكن قريبة ومريحة</button>
+    <button class="t" data-a="dir"><span>🧭</span>الاتجاهات والموقع</button>
+    <button class="t" data-a="wx"><span>🌤️</span>الطقس والهدوم</button>
+    <button class="t" data-a="notes"><span>📝</span>الملاحظات</button>
+    <button class="t" data-a="call"><span>📞</span>اتصال سريع</button>
+    <button class="t" data-a="msg"><span>💬</span>قراءة الرسايل</button>
+    <button class="t" data-a="calc"><span>🧮</span>آلة حاسبة صوتية</button>
+    
+    
+    
+    <button class="t" data-a="med"><span>💊</span>مواعيد الدواء</button>
+    <button class="t" data-a="fam"><span>👨‍👩‍👧</span>لوحة الأهل</button>
+  </div>
+</div>
+
+<div id="cam" class="scr">
+  <button class="back" data-a="home">⬅ رجوع</button>
+  <h2 id="ct"></h2>
+  <video id="v" autoplay playsinline muted></video>
+  <button class="big" id="snap">صوّر وقول لي</button>
+  <div id="cmsg" class="note"></div>
+</div>
+
+<div id="sosp" class="scr">
+  <button class="back" data-a="home">⬅ رجوع</button>
+  <h2 style="color:#c1121f;font-size:36px">🚨 الطوارئ</h2>
+  <p style="font-size:20px">رقم أهلك للطوارئ</p>
+  <input id="sn" type="tel" placeholder="الرقم" aria-label="رقم الطوارئ" style="text-align:center;font-size:34px;background:#fff;color:#0a1f44">
+  <button class="big" id="sdict">🎤 قول الرقم بصوتك</button>
+  <button class="big" id="scall" style="background:#c1121f;color:#fff;font-size:30px;padding:28px">📞 اتصل دلوقتي</button>
+  <button class="big alt" id="ssave">💾 احفظ الرقم</button>
+</div>
+
+<div id="med" class="scr">
+  <button class="back" data-a="home">⬅ رجوع</button>
+  <h2>💊 مواعيد الدواء</h2>
+  <button class="big" id="addm">🎤 إضافة دواء بصوتك</button>
+  <button class="big" id="boxm">📷 صوّر علبة الدواء</button>
+  <button class="big alt" id="readm">🔊 اقرا مواعيد الدواء</button>
+  <button class="big" id="tkn">✅ أخدت الدواء</button>
+  <div id="ml" style="width:100%;display:flex;flex-direction:column;align-items:center"></div>
+  <p style="color:#64748b;font-size:16px;text-align:center">التذكير بيشتغل والتطبيق مفتوح على الموبايل.</p>
+</div>
+
+<div id="fam" class="scr">
+  <button class="back" data-a="home">⬅ رجوع</button>
+  <h2>👨‍👩‍👧 لوحة الأهل</h2>
+  <p style="font-size:18px;text-align:center;max-width:420px">أهلك يقدروا يشوفوا إنك أخدت الدواء، ومكانك لو وافقت. إنت اللي بتختار، وتقدر توقف في أي وقت.</p>
+  <button class="big" id="fmed" aria-pressed="false">⬜ مشاركة حالة الدواء: مقفولة</button>
+  <button class="big" id="floc" aria-pressed="false">⬜ مشاركة مكاني: مقفولة</button>
+  <button class="big alt" id="fshare">📤 ابعت اللينك لأهلك</button>
+  <button class="big alt" id="fstop" style="border-color:#ff6b6b;color:#ff6b6b">⛔ وقّف المشاركة وامسح بياناتي</button>
+  <div id="fst" class="note" role="status" aria-live="polite"></div>
+  <p style="color:#64748b;font-size:16px;text-align:center">التحديث بيشتغل والتطبيق مفتوح. أي حد معاه اللينك يقدر يشوف اللي متشارك.</p>
+</div>
+
+<div id="near" class="scr">
+  <button class="back" data-a="home">⬅ رجوع</button>
+  <h2>أماكن قريبة ومريحة</h2>
+  <button class="big" id="loc">📍 اسمح بتحديد موقعي</button>
+  <div class="grid">
+    <button class="t" data-q="دورات مياه ميسرة لذوي الإعاقة"><span>🚻</span>دورات مياه</button>
+    <button class="t" data-q="مصعد أسانسير"><span>🛗</span>مصاعد</button>
+    <button class="t" data-q="أماكن استراحة وجلوس"><span>🪑</span>أماكن استراحة</button>
+    <button class="t" data-q="مدخل ميسر للكراسي المتحركة"><span>♿</span>مداخل ميسّرة</button>
+  </div>
+  <button class="big alt" id="gen">🔎 بحث عام من غير موقعي</button>
+  <div id="nmsg" class="note">الموقع مش متحدد – هتبحث بحث عام.</div>
+</div>
+
+<div id="notes" class="scr">
+  <button class="back" data-a="home">⬅ رجوع</button>
+  <h2>الملاحظات</h2>
+  <button class="big" id="rec">🎤 سجّل ملاحظة</button>
+  <button class="big alt" id="readn">🔊 اقرا ملاحظاتي</button>
+  <div id="nl" style="width:100%;display:flex;flex-direction:column;align-items:center"></div>
+</div>
+
+<script>
+/* عنوان سيرفر قراءة العلبة (baseer-server.js). سيبه فاضي لو لسه ما شغلتوش. مثال: https://your-server.example.com */
+var BASEER_API="";
+
+var $=function(i){return document.getElementById(i)};
+var S={name:'',fam:'',pos:null,stream:null,mode:'',rec:null,listening:false};
+function ld(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+/* صوت راجل بالعامية المصرية */
+var voice=null;
+function pick(){var vs=speechSynthesis.getVoices();var ar=vs.filter(function(v){return /^ar/i.test(v.lang)});
+ var F=/Salma|Zariyah|Laila|Zeina|Mona|Amira|Female|Fatima|Hala|Noura/i,M=/Shakir|Hamed|Majed|Maged|Naayf|Tarik|Male|Mohamed|Fahed|Hoda/i;
+ ar.sort(function(a,b){function w(v){return (M.test(v.name)?2:F.test(v.name)?-2:0)+(/EG/i.test(v.lang.replace('_','-'))?3:0)}return w(b)-w(a)});
+ window.ARV=ar;if(ar.length){var K=0;voice=ar[K%ar.length];window.VP=[.3,1,1.5][Math.floor(K/ar.length)%3]}else{voice=null;window.VP=null}}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function eg(t){if(voice&&/EG/i.test(voice.lang.replace('_','-')))return t;return t.replace(/ث/g,'ت').replace(/ذ/g,'ز').replace(/ظ/g,'ض').replace(/ق/g,'أ')}
+var SAYID=0;
+function say(t,cb){var id=++SAYID,done=false;function fin(){if(done||id!==SAYID)return;done=true;if(cb)cb()}
+ try{if(!voice)pick();speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(eg(t));u.lang='ar-EG';if(voice)u.voice=voice;u.pitch=window.VP!=null?window.VP:((voice&&/Shakir|Hamed|Majed|Maged|Naayf|Tarik|Male|Mohamed|Fahed/i.test(voice.name))?.9:.25);u.rate=.95;
+  u.onend=fin;u.onerror=fin;speechSynthesis.speak(u);
+  /* احتياطي: لو المتصفح ما بلّغش إن الكلام خلص، المايك يفتح برضه */
+  if(cb)setTimeout(fin,2000+t.length*150)}catch(e){fin()}}
+function show(id){document.querySelectorAll('.scr').forEach(function(s){s.classList.remove('on')});$(id).classList.add('on');if(id!=='cam')stopCam()}
+
+/* التعرف على الكلام */
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function micMsg(m){$('said').textContent=m;var l=$('login');if(l&&l.classList.contains('on')){var x=$('lmsg');if(!x){x=document.createElement('div');x.id='lmsg';x.className='note';x.setAttribute('role','status');l.appendChild(x)}x.textContent=m}}
+function listen(cb,retry){if(!SR){micMsg('المتصفح ده مابيدعمش التعرف على الصوت. افتح التطبيق من جوجل كروم.');say('المتصفح ده مابيدعمش التعرف على الصوت. افتح التطبيق من جوجل كروم.');return}
+ if(!window.isSecureContext&&location.protocol!=='file:'){micMsg('المايك محتاج اللينك يبدأ بـ https');say('المايك محتاج اللينك يبدأ بـ اتش تي تي بي إس.');return}
+ try{S.rec&&S.rec.abort()}catch(e){}
+ var r=new SR();r.lang='ar-EG';r.interimResults=false;r.maxAlternatives=1;S.rec=r;var got=false;
+ r.onstart=function(){$('mic').classList.add('live');micMsg('🎤 بسمعك... اتكلم دلوقتي')};
+ r.onend=function(){$('mic').classList.remove('live')};
+ r.onerror=function(e){$('mic').classList.remove('live');var er=e&&e.error;
+  if(er==='not-allowed'||er==='service-not-allowed'){micMsg('المايك مقفول. دوس على علامة القفل جنب اللينك واسمح بالميكروفون.');return say('المايك مقفول. اسمح بالميكروفون من إعدادات المتصفح.')}
+  if(er==='network'){micMsg('التعرف على الصوت محتاج نت.');return say('التعرف على الصوت محتاج إنترنت.')}
+  if(er==='audio-capture'){micMsg('مفيش ميكروفون شغال على الجهاز.');return say('مش لاقي ميكروفون شغال.')}
+  if(er==='aborted')return;
+  if(!retry)return say('ماسمعتكش كويس، قول تاني',function(){listen(cb,true)});
+  micMsg('ماسمعتش حاجة. دوس الزرار وجرّب تاني.');say('ماسمعتش حاجة. دوس الزرار وجرّب تاني.')};
+ r.onresult=function(e){if(got)return;got=true;var t=e.results[0][0].transcript;$('said').textContent='«'+t+'»';var x=$('lmsg');if(x)x.textContent='سمعت: «'+t+'»';cb(t)};
+ try{r.start()}catch(e){micMsg('ماقدرتش أفتح المايك، دوس تاني.')}}
+
+/* الأوامر الصوتية */
+function route(t){
+ if(/أخدت|اخدت|خدت|شربت/.test(t)&&/دوا|دواء|علاج|حباية/.test(t))return markTaken();
+ if(/لوحة|لوحه|متابع/.test(t))return act('fam');
+ if(/طوار|نجد|ساعد|الحق|إسعاف|اسعاف/.test(t))return act('sos');
+ if(/طقس|جو|حر|برد|ألبس|البس/.test(t))return act('wx');
+ if(/فلوس|نقود|عمل|جنيه/.test(t))return act('cur');
+ if(/مواعيد|ميعاد|أدوية|ادوية|دوا|دواء|علاج/.test(t))return act('med');
+ if(/منتج|علب|باركود/.test(t))return act('prod');
+ if(/اقرا|إقرا|نص|مكتوب|ورق/.test(t)&&!/رسا|ملاحظ/.test(t))return act('txt');
+ if(/ملاحظ|سجل/.test(t))return act('notes');
+ if(/رسا|رسائل/.test(t))return act('msg');
+ if(/اتصل|كلم|مكالم/.test(t))return act('call');
+ if(/حمام|حمّام|دور.* مياه|مصعد|اسانسير|أسانسير|استراح|مدخل|قريب|مكان/.test(t)){
+   var q=/حمام|حمّام|مياه/.test(t)?'دورات مياه ميسرة':/مصعد|اسانسير|أسانسير/.test(t)?'مصعد':/استراح/.test(t)?'أماكن استراحة':'مدخل ميسر';return openMaps(q)}
+ if(/اتجاه|موقع|فين|أنا فين|انا فين/.test(t))return act('dir');
+ if(/شوف|إيه ده|ايه ده|تعرف|قدامي|أشياء/.test(t))return act('obj');
+ if(/رجوع|الرئيسية/.test(t))return act('home');
+ say('مافهمتش، قول مثلاً: طقس، أو نقود، أو طوارئ.')}
+
+function act(a){
+ if(a==='fam')return famPage();
+ if(a==='med')return medPage();
+ if(a==='voice')return say('اتفضل',function(){listen(route)});
+ if(a==='calc')return calc();
+ if(a==='home'){show('home');return say('إحنا في الرئيسية. قول اللي محتاجه.')}
+ if(a==='sos')return sosPage();
+ if(a==='obj')return camera('obj','تعرّف على الأشياء','ثبّت الموبايل قدامك وقول لي لما تحب أصوّر.');
+ if(a==='cur')return camera('cur','الفلوس','اقرّب الورقة من الكاميرا.');
+ if(a==='prod')return camera('prod','قراءة المنتجات','وجّه الباركود ناحية الكاميرا.');
+ if(a==='txt')return camera('txt','قراءة النصوص','وجّه الكاميرا على الورقة.');
+ if(a==='near'){show('near');return say('اختار اللي محتاجه: حمّام، أسانسير، استراحة، أو مدخل. أو اسمحلي أعرف مكانك.')}
+ if(a==='dir')return where();
+ if(a==='wx')return weather();
+ if(a==='notes'){show('notes');drawNotes();return say('دوس سجّل ملاحظة وقول اللي عايزه.')}
+ if(a==='call'){return say('قول اسم الشخص أو رقمه.',function(){listen(quick)})}
+ if(a==='msg')return say('المتصفح مابيسمحش يقرا رسايل الموبايل. في نسخة الأندرويد هقراها لك لوحدي.')}
+
+/* طوارئ */
+function sos(){var n=S.fam||ld('fam','');
+ if(!n){say('مفيش رقم طوارئ متسجل. اكتب رقم حد من أهلك في شاشة الدخول.');return}
+ say('طوارئ! بتصل بأهلك دلوقتي.',function(){
+  var u=S.pos?' موقعي: https://maps.google.com/?q='+S.pos.latitude+','+S.pos.longitude:'';
+  try{window.open('sms:'+n+'?body='+encodeURIComponent('محتاج مساعدة بسرعة!'+u),'_blank')}catch(e){}
+  location.href='tel:'+n})}
+
+/* الكاميرا */
+function stopCam(){clearTimeout(S.autoT);if(S.stream){S.stream.getTracks().forEach(function(t){t.stop()});S.stream=null}}
+function camera(m,title,hint){S.mode=m;show('cam');$('ct').textContent=title;$('cmsg').textContent=hint;say(hint);
+ navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(function(s){S.stream=s;$('v').srcObject=s;if(m==='prod')scanBar();if(m==='medbox')S.autoT=setTimeout(function(){if(S.mode==='medbox'&&S.stream)readBox()},9000)}).catch(function(){say('الكاميرا مش شغالة. افتحلها الصلاحية من الإعدادات.')})}
+function scanBar(){if(!('BarcodeDetector' in window)){return}
+ var d=new BarcodeDetector();(function loop(){if(S.mode!=='prod'||!S.stream)return;
+  d.detect($('v')).then(function(r){if(r.length){var c=r[0].rawValue;$('cmsg').textContent='باركود: '+c;say('لقيت الباركود. رقمه '+c.split('').join(' '))}else setTimeout(loop,600)}).catch(function(){setTimeout(loop,800)})})()}
+$('snap').onclick=function(){
+ if(S.mode==='medbox')return readBox();
+ if(S.mode==='prod'&&!('BarcodeDetector' in window))return say('قراءة الباركود شغالة على كروم أندرويد.');
+ var m={obj:'التعرّف على الأشياء',cur:'التعرّف على الفلوس',txt:'قراءة النصوص',prod:'قراءة المنتجات'}[S.mode];
+ say(m+' محتاجة خدمة ذكاء اصطناعي بتتوصل بالنت. هتشتغل بالكامل في نسخة الأندرويد.')};
+
+/* الموقع */
+function getPos(ok){if(!navigator.geolocation)return say('الموقع مش شغال هنا.');
+ navigator.geolocation.getCurrentPosition(function(p){S.pos=p.coords;S.posAt=Date.now();ok(p.coords)},function(){say('ماعرفتش أعرف مكانك. افتح صلاحية الموقع من الإعدادات.')},{enableHighAccuracy:true,timeout:12000})}
+function where(){say('ثانية واحدة، بحدد مكانك.');getPos(function(c){
+ var h=c.heading!=null&&!isNaN(c.heading)?c.heading:null,dr=['الشمال','الشمال الشرقي','الشرق','الجنوب الشرقي','الجنوب','الجنوب الغربي','الغرب','الشمال الغربي'];
+ say('أنا عرفت مكانك. '+(h!=null?'إنت ماشي ناحية '+dr[Math.round(h/45)%8]+'. ':'')+'لو عايز تروح مكان، قول لي هتروح فين.',function(){listen(function(t){window.open('https://www.google.com/maps/dir/?api=1&travelmode=walking&destination='+encodeURIComponent(t)+'&origin='+c.latitude+','+c.longitude,'_blank');say('فتحتلك الطريق على الخريطة.')})})})}
+function openMaps(q){var u=S.pos?'https://www.google.com/maps/search/'+encodeURIComponent(q)+'/@'+S.pos.latitude+','+S.pos.longitude+',16z':'https://www.google.com/maps/search/'+encodeURIComponent(q);
+ say('بدوّرلك على '+q+' في خرائط جوجل.');window.open(u,'_blank')}
+$('loc').onclick=function(){getPos(function(){$('nmsg').textContent='تمام، الموقع اتحدد. ابحث دلوقتي.';say('تمام، عرفت مكانك. اختار اللي تدوّر عليه.')})};
+$('gen').onclick=function(){S.pos=null;$('nmsg').textContent='بحث عام من غير موقعك.';openMaps('أماكن ميسرة لذوي الإعاقة')};
+document.querySelectorAll('[data-q]').forEach(function(b){b.onclick=function(){openMaps(b.dataset.q)}});
+
+/* الطقس */
+function advice(t){return t>=32?'الجو حر قوي. البس هدوم خفيفة قطن وفاتحة، واشرب مياه كتير.':t>=25?'الجو حلو ودافي. البس هدوم خفيفة.':t>=18?'الجو معتدل. البس جاكت خفيف.':t>=12?'الجو ساقع. البس هدوم تقيلة وجاكت.':'الجو برد قوي. البس هدوم تقيلة جداً وكوفية.'}
+function weather(){say('ثانية، بشوف الطقس.');
+ function go(c){fetch('https://api.open-meteo.com/v1/forecast?latitude='+c.latitude+'&longitude='+c.longitude+'&current_weather=true').then(function(r){return r.json()}).then(function(d){var t=Math.round(d.current_weather.temperature);say('الحرارة دلوقتي '+t+' درجة. '+advice(t))}).catch(fallback)}
+ function fallback(){var m=new Date().getMonth()+1,t=[7,8,6,9].indexOf(m)>-1?34:[12,1,2].indexOf(m)>-1?16:26;say('ماعرفتش أجيب الطقس بالظبط، بس في الوقت ده من السنة غالباً '+advice(t))}
+ if(S.pos)go(S.pos);else getPos(go)}
+
+/* الملاحظات */
+function drawNotes(){var n=ld('notes',[]);$('nl').innerHTML=n.length?n.map(function(x){return '<div class="note">'+x.replace(/</g,'&lt;')+'</div>'}).join(''):'<div class="note">مفيش ملاحظات لسه.</div>'}
+$('rec').onclick=function(){say('قول ملاحظتك.',function(){listen(function(t){var n=ld('notes',[]);n.unshift(t);sv('notes',n);drawNotes();say('سجّلت الملاحظة.')})})};
+$('readn').onclick=function(){var n=ld('notes',[]);say(n.length?'عندك '+n.length+' ملاحظات. '+n.slice(0,5).join('. ثم. '):'مفيش ملاحظات.')};
+
+/* اتصال سريع */
+function quick(t){var d=t.replace(/[^0-9٠-٩]/g,'').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632});
+ var f=ld('contacts',{});if(d.length>5){say('بتصل بالرقم.',function(){location.href='tel:'+d})}
+ else if(/أهل|ماما|بابا|امي|أمي|أبويا/.test(t)&&(S.fam||ld('fam',''))){var n=S.fam||ld('fam','');say('بكلم أهلك.',function(){location.href='tel:'+n})}
+ else say('قول الرقم رقم رقم، أو قول: كلّم أهلي.')}
+
+function calc(){say('قول العملية، مثلاً: خمسة زائد تلاتة.',function(){listen(function(t){
+ var w={'صفر':0,'واحد':1,'اتنين':2,'اثنين':2,'تلاتة':3,'ثلاثة':3,'اربعة':4,'أربعة':4,'خمسة':5,'ستة':6,'سبعة':7,'تمانية':8,'ثمانية':8,'تسعة':9,'عشرة':10};
+ var e=t.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/زائد|زايد/g,'+').replace(/ناقص/g,'-').replace(/ضرب|في/g,'*').replace(/قسمة|على|مقسوم/g,'/');
+ for(var k in w)e=e.split(k).join(w[k]);e=e.replace(/[^0-9+\-*\/.]/g,'');
+ try{var r=Function('return '+e)();say(isFinite(r)?'الناتج '+(Math.round(r*100)/100):'مش قادر أحسبها')}catch(x){say('مافهمتش العملية، قولها تاني.')}})})}
+var SUB={obj:'وجّه الكاميرا واسأل عن حاجة',cur:'اعرف فئة الورقة بالكاميرا',prod:'اسمع اسم المنتج ومعلوماته',txt:'اقرا الورق واللافتات',near:'حمامات، مصاعد، استراحة',dir:'اعرف مكانك واتجاهك',wx:'الحرارة وتلبس إيه',notes:'سجّل واسمع ملاحظاتك',call:'اتصل بأي حد بصوتك',msg:'اسمع رسايلك',calc:'احسب بصوتك',med:'ميعاد الدواء بالصوت'};
+document.querySelectorAll('#home .t').forEach(function(b){var s=SUB[b.dataset.a];if(s){var m=document.createElement('small');m.textContent=s;b.appendChild(m)}});
+var EX=true,last=null;
+function lbl(b){var c=b.cloneNode(true);c.querySelectorAll('span,small').forEach(function(x){x.remove()});var t=(b.getAttribute('aria-label')||c.textContent||'').replace(/[^\u0600-\u06FFa-zA-Z0-9 ]/g,' ').replace(/\s+/g,' ').trim();return t||b.textContent.trim()}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('button');if(!b||!EX||b.id==='ex'||b.id==='mic'||b.id==='scall'||b.id==='sdict'||b.dataset.a==='sos')return;
+ if(last===b){last=null;return}
+ e.stopImmediatePropagation();e.preventDefault();var done=false;function go(){if(done)return;done=true;last=b;b.click()}
+ say('إنت واقف على '+lbl(b),function(){setTimeout(go,150)});setTimeout(go,3000)},true);
+$('ex').onclick=function(){EX=!EX;last=null;$('ex').textContent='🗣️ وضع الشرح: '+(EX?'شغال':'مقفول');say(EX?'وضع الشرح شغال. أي زرار تدوس عليه هقولك إنت واقف على إيه، وبعدين هنفّذه.':'وضع الشرح اتقفل. كل ضغطة هتنفّذ مباشرة.')};
+var DW={'صفر':0,'زيرو':0,'واحد':1,'اتنين':2,'اثنين':2,'تلاتة':3,'ثلاثة':3,'تلات':3,'اربعة':4,'أربعة':4,'اربع':4,'خمسة':5,'خمس':5,'ستة':6,'ست':6,'سبعة':7,'سبع':7,'تمانية':8,'ثمانية':8,'تمان':8,'تسعة':9,'تسع':9};
+function toNum(t){return t.split(/\s+/).map(function(w){return DW[w]!==undefined?DW[w]:w}).join('').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[^0-9+]/g,'')}
+function sp(n){return n.split('').join(' ')}
+function sosPage(){show('sosp');var n=S.fam||ld('fam','');$('sn').value=n;
+ if(n)say('إنت في شاشة الطوارئ. الرقم المسجّل '+sp(n)+'. دوس اتصل دلوقتي، أو دوس قول الرقم عشان تغيّره.');else dictNum()}
+function dictNum(){say('قول رقم موبايل أهلك رقم رقم.',function(){listen(function(t){var n=toNum(t);if(n.length<8)return say('الرقم مش كامل، قول تاني.',dictNum);
+ $('sn').value=n;S.fam=n;sv('fam',n);var u=ld('user',null);if(u){u.fam=n;sv('user',u)}say('سمعت '+sp(n)+'. اتحفظ. دوس اتصل دلوقتي.')})})}
+$('sdict').onclick=dictNum;
+$('ssave').onclick=function(){var n=toNum($('sn').value);S.fam=n;sv('fam',n);say('اتحفظ الرقم '+sp(n))};
+$('scall').onclick=function(){var n=toNum($('sn').value);if(!n)return say('مفيش رقم. دوس قول الرقم الأول.');S.fam=n;sv('fam',n);var a=document.createElement('a');a.href='tel:'+n;document.body.appendChild(a);a.click();a.remove()};
+var HW={'واحدة':1,'واحد':1,'اتنين':2,'اثنين':2,'تلاتة':3,'ثلاثة':3,'اربعة':4,'أربعة':4,'خمسة':5,'ستة':6,'سبعة':7,'تمانية':8,'ثمانية':8,'تسعة':9,'عشرة':10,'حداشر':11,'احداشر':11,'اتناشر':12,'اثناشر':12};
+function parseT(t){t=t.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632});var h=null,m=0,x=t.match(/(\d{1,2})\s*[:.]\s*(\d{2})/);
+ if(x){h=+x[1];m=+x[2]}else{var d=t.match(/\d{1,2}/);if(d)h=+d[0];else for(var k in HW)if(t.indexOf(k)>-1){h=HW[k];break}
+  if(h!=null){if(/ونص|ونصف/.test(t))m=30;else if(/وربع/.test(t))m=15;else if(/وثلث/.test(t))m=20;else if(/إلا ربع|الا ربع/.test(t)){m=45;h=h-1||12}}}
+ if(h==null||h>24||m>59)return null;
+ return {h:h,m:m,pm:/مساء|بالليل|ليل|عصر|مغرب|ظهر|ضهر/.test(t),am:/صبح|صباح|فجر/.test(t)}}
+function sayT(t){var a=t.split(':'),h=+a[0],m=+a[1],p=h<5?'بالليل':h<12?'الصبح':h<17?'بعد الضهر':h<20?'العصر':'بالليل';return 'الساعة '+(h%12||12)+(m?' و'+m+' دقيقة':'')+' '+p}
+function meds(){return ld('meds',[]).sort(function(x,y){return x.t<y.t?-1:1})}
+function clean(n){return n.replace(/[<>"|]/g,'')}
+function drawMeds(){var a=meds();$('ml').innerHTML=a.length?a.map(function(x){return '<div class="note">💊 '+clean(x.n)+' — '+sayT(x.t)+'<br><span>اليوم: '+SL[medStatus(x)]+'</span><br><button class="back" style="margin:8px 0 0" aria-label="امسح دوا '+clean(x.n)+'" data-d="'+clean(x.n)+'|'+x.t+'">🗑 مسح</button></div>'}).join(''):'<div class="note">لسه مفيش أدوية متسجلة.</div>';
+ $('ml').querySelectorAll('[data-d]').forEach(function(b){b.onclick=function(){var k=b.dataset.d,a=meds().filter(function(x){return (clean(x.n)+'|'+x.t)!==k});sv('meds',a);drawMeds();famSync();say('مسحت الدواء.')}})}
+function medPage(){show('med');drawMeds();var a=meds();say(a.length?'إنت في شاشة مواعيد الدواء. عندك '+a.length+' أدوية. دوس اقرا المواعيد، أو إضافة دواء بصوتك.':'إنت في شاشة مواعيد الدواء. لسه مفيش أدوية. دوس إضافة دواء بصوتك وقول اسمه وميعاده.')}
+function readMeds(){var a=meds();if(!a.length)return say('مفيش أدوية متسجلة.');say('عندك '+a.length+' أدوية. '+a.map(function(x){return clean(x.n)+' '+sayT(x.t)}).join('. وبعده. '))}
+function addMed(){say('قول اسم الدواء.',function(){listen(function(n){say('تمام، '+n+'. وميعاده الساعة كام؟ قول مثلاً: تمانية الصبح، أو تسعة ونص بالليل.',function(){askT(n)})})})}
+function askT(n){listen(function(t){var p=parseT(t);if(!p)return say('ماسمعتش الساعة كويس. قولها تاني.',function(){askT(n)});
+ if(!p.am&&!p.pm&&p.h>0&&p.h<=12)return say('الساعة '+p.h+' الصبح ولا بالليل؟',function(){listen(function(w){p.pm=/مساء|بالليل|ليل|عصر|مغرب|ظهر|ضهر/.test(w);p.am=!p.pm;saveMed(n,p)})});
+ saveMed(n,p)})}
+function saveMed(n,p){var h=p.h>12||p.h===0?p.h:(p.pm&&p.h<12?p.h+12:(p.am&&p.h===12?0:p.h)),t=('0'+(h%24)).slice(-2)+':'+('0'+p.m).slice(-2),a=ld('meds',[]);a.push({n:clean(n),t:t});sv('meds',a);drawMeds();famSync();say('سجّلت دوا '+n+' '+sayT(t)+'. هفكّرك في الميعاد وأنا مفتوح.')}
+function snapJpg(){var v=$('v');if(!v.videoWidth)return null;var c=document.createElement('canvas'),k=Math.min(1,1280/Math.max(v.videoWidth,v.videoHeight));c.width=Math.round(v.videoWidth*k);c.height=Math.round(v.videoHeight*k);c.getContext('2d').drawImage(v,0,0,c.width,c.height);return c.toDataURL('image/jpeg',.85).split(',')[1]}
+function readBox(){clearTimeout(S.autoT);
+ if(!BASEER_API)return say('قراءة اسم العلبة محتاجة خدمة على الإنترنت ولسه مش متوصلة. هخليك تقول الاسم بصوتك.',function(){show('med');addMed()});
+ var img=snapJpg();if(!img)return say('الكاميرا لسه مجهزتش. جرّب تاني.');
+ say('ثانية واحدة، بقرا العلبة.');
+ var ctl=new AbortController(),to=setTimeout(function(){ctl.abort()},25000);
+ fetch(BASEER_API+'/med',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:img}),signal:ctl.signal})
+ .then(function(r){if(!r.ok)throw 0;return r.json()})
+ .then(function(j){clearTimeout(to);var n=j&&j.name?clean(String(j.name)).slice(0,60):'';
+  if(!n)return say('مقدرتش أقرا اسم العلبة. قرّبها وخلّي الاسم قدام الكاميرا وجرّب تاني، أو قول الاسم بصوتك.');
+  $('cmsg').textContent=n;
+  say('قريت على العلبة: '+n+'. اتأكد من الاسم مع الصيدلي. أسجّله وأحدد ميعاده؟ قول أيوه أو لأ.',function(){listen(function(a){
+   if(isYes(a)){show('med');say('وميعاده الساعة كام؟ قول مثلاً: تمانية الصبح، أو تسعة ونص بالليل.',function(){askT(n)})}
+   else say('تمام. صوّر تاني أو ارجع.')})})})
+ .catch(function(){clearTimeout(to);say('حصلت مشكلة في الاتصال. جرّب تاني أو قول اسم الدواء بصوتك.')})}
+$('boxm').onclick=function(){camera('medbox','تصوير علبة الدواء','وجّه الكاميرا على اسم الدواء المكتوب على العلبة وثبّت إيدك. هصوّر لوحدي كمان ثواني، أو دوس صوّر.')};
+
+/* ===== حالة الدواء ولوحة الأهل ===== */
+var SL={taken:'أخدته ✅',pending:'مستني تأكيدك ⏳',missed:'فات ميعاده ❌',upcoming:'لسه ميعاده ما جاش',unknown:'مفيش تسجيل'};
+function isYes(a){var w=(a||'').trim().split(/\s+/),N=['لا','لأ','لاء','مش','لاا'],Y=['ايوه','أيوه','ايوة','أيوة','اه','آه','أه','نعم','موافق','تمام','ماشي','اوكي','أوكي','اكيد','أكيد'];
+ if(w.some(function(x){return N.indexOf(x)>-1}))return false;return w.some(function(x){return Y.indexOf(x)>-1})}
+function dkey(){return new Date().toDateString()}
+function mlog(){return ld('medlog',[]).filter(function(x){return Date.now()-x.ts<3*864e5})}
+function logMed(x,st){var a=mlog(),d=dkey(),e=a.filter(function(y){return y.d===d&&y.n===x.n&&y.t===x.t})[0];
+ if(e){e.s=st;e.ts=Date.now()}else a.push({d:d,n:x.n,t:x.t,s:st,ts:Date.now()});sv('medlog',a);famSync()}
+function medStatus(x){var e=mlog().filter(function(y){return y.d===dkey()&&y.n===x.n&&y.t===x.t})[0];if(e)return e.s;
+ var d=new Date(),k=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);return x.t>k?'upcoming':'unknown'}
+function sweepMissed(){var a=mlog(),ch=false;a.forEach(function(y){if(y.s==='pending'&&Date.now()-y.ts>45*60000){y.s='missed';ch=true}});if(ch){sv('medlog',a);famSync()}}
+function markTaken(){var d=dkey(),p=mlog().filter(function(y){return y.d===d&&(y.s==='pending'||y.s==='missed')}).sort(function(a,b){return b.ts-a.ts})[0];
+ if(!p)return say('مفيش دواء مستني تأكيد دلوقتي.');logMed(p,'taken');if($('ml'))drawMeds();say('تمام، سجّلت إنك أخدت '+p.n+'.')}
+function rnd(n){var a=new Uint8Array(n),al='abcdefghjkmnpqrstuvwxyz23456789',o='';crypto.getRandomValues(a);for(var i=0;i<n;i++)o+=al[a[i]%al.length];return o}
+function famC(){return ld('fam',null)}
+function famSnap(){var c=famC();if(!c)return null;var o={meds:null,loc:null};
+ if(c.med)o.meds=meds().map(function(x){return {n:clean(x.n),t:x.t,s:medStatus(x)}});
+ if(c.loc&&S.pos&&S.posAt)o.loc={lat:S.pos.latitude,lng:S.pos.longitude,at:S.posAt};return o}
+function famSync(){var c=famC();if(!c||!BASEER_API||!(c.med||c.loc))return;
+ try{fetch(BASEER_API+'/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fid:c.fid,wk:c.wk,data:famSnap()})}).catch(function(){})}catch(e){}}
+function famPos(){var c=famC();if(!c||!c.loc||!navigator.geolocation)return;
+ navigator.geolocation.getCurrentPosition(function(p){S.pos=p.coords;S.posAt=Date.now();famSync()},function(){},{enableHighAccuracy:false,timeout:15000,maximumAge:120000})}
+setInterval(function(){famPos();famSync()},300000);
+function drawFam(){var c=famC()||{};
+ $('fmed').textContent=(c.med?'✅':'⬜')+' مشاركة حالة الدواء: '+(c.med?'شغّالة':'مقفولة');$('fmed').setAttribute('aria-pressed',c.med?'true':'false');
+ $('floc').textContent=(c.loc?'✅':'⬜')+' مشاركة مكاني: '+(c.loc?'شغّالة':'مقفولة');$('floc').setAttribute('aria-pressed',c.loc?'true':'false');
+ $('fst').textContent=!BASEER_API?'المشاركة محتاجة سيرفر. لسه مش متوصل.':(c.med||c.loc?'أهلك يقدروا يشوفوا: '+[c.med?'حالة الدواء':'',c.loc?'مكانك':''].filter(Boolean).join(' و ')+'.':'مفيش حاجة متشاركة دلوقتي.')}
+function famPage(){show('fam');drawFam();var c=famC()||{};
+ say(!BASEER_API?'لوحة الأهل محتاجة سيرفر ولسه مش متوصلة.':(c.med||c.loc?'المشاركة شغّالة. دوس ابعت اللينك لأهلك، أو وقّف المشاركة.':'لوحة الأهل بتخلي أهلك يشوفوا إنك أخدت الدواء، ومكانك لو وافقت. اختار اللي تحب تشاركه.'))}
+function famToggle(kind){var c=famC()||{};
+ if(c[kind]){c[kind]=false;if(!c.med&&!c.loc)return famStop();sv('fam',c);famSync();drawFam();return say('وقّفت مشاركة '+(kind==='loc'?'المكان':'حالة الدواء')+'.')}
+ if(!BASEER_API)return say('المشاركة محتاجة سيرفر ولسه مش متوصل.');
+ say(kind==='loc'?'هتشارك مكانك مع أي حد معاه لينك أهلك، لحد ما توقف ده. موافق؟ قول أيوه أو لأ.':'هتشارك مع أي حد معاه لينك أهلك إنت أخدت الدواء ولا لأ. موافق؟ قول أيوه أو لأ.',function(){listen(function(a){
+  if(!isYes(a))return say('تمام، مش هشارك.');
+  c=famC()||{};if(!c.fid){c.fid=rnd(24);c.wk=rnd(24)}c[kind]=true;sv('fam',c);
+  if(kind==='loc')famPos();famSync();drawFam();say('تمام، فعّلت. دوس ابعت اللينك لأهلك عشان يتابعوا.')})})}
+function famShare(){var c=famC();if(!c||!c.fid)return say('فعّل مشاركة الدواء أو المكان الأول.');var u=BASEER_API+'/f/'+c.fid;$('fst').textContent=u;
+ if(navigator.share){navigator.share({title:'بصير - لوحة الأهل',text:'تابع حالتي من اللينك ده:',url:u}).catch(function(){});say('اختار تبعت اللينك لمين. افتكر إن أي حد معاه اللينك يقدر يشوف.')}
+ else if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){say('نسخت اللينك. ابعته لأهلك بس. أي حد معاه اللينك يقدر يشوف.')},function(){say('اللينك ظاهر على الشاشة.')})}
+ else say('اللينك ظاهر على الشاشة.')}
+function famStop(){var c=famC();try{localStorage.removeItem('fam')}catch(e){}drawFam();
+ if(!c||!c.fid||!BASEER_API)return say('وقّفت المشاركة.');
+ fetch(BASEER_API+'/revoke',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fid:c.fid,wk:c.wk})})
+ .then(function(r){if(!r.ok)throw 0;say('وقّفت المشاركة ومسحت بياناتك من السيرفر.')})
+ .catch(function(){say('وقّفت المشاركة من عندي، بس السيرفر مردّش. البيانات هتتمسح لوحدها خلال 24 ساعة.')})}
+$('fmed').onclick=function(){famToggle('med')};$('floc').onclick=function(){famToggle('loc')};
+$('fshare').onclick=famShare;$('fstop').onclick=famStop;$('tkn').onclick=markTaken;
+$('addm').onclick=addMed;$('readm').onclick=readMeds;
+var fired={};setInterval(function(){sweepMissed();var d=new Date(),k=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2),day=d.toDateString();meds().forEach(function(x){var id=day+x.n+k;if(x.t===k&&!fired[id]){fired[id]=1;try{navigator.vibrate&&navigator.vibrate([400,200,400])}catch(e){}var m='ميعاد الدواء! دلوقتي وقت دوا '+x.n+'.';$('said').textContent='💊 '+m;say(m+' '+m+' ولما تاخده قول: أخدت الدواء.');logMed(x,'pending')}})},15000);
+/* البداية والدخول */
+function enter(){document.body.classList.add('in');var h=new Date().getHours();$('gr').textContent=(h<12?'صباح الخير':'مساء الخير')+' يا '+(S.name||'صديقي')+' 👋';$('un').textContent=S.name||'مستخدم بصير';show('home');$('hi').textContent='أهلاً '+(S.name||'بيك')+' في بَصِير';
+ say('أهلاً '+(S.name||'بيك')+' في بصير. أنا معاك. دوس على المايك وقول اللي محتاجه، زي: طقس، نقود، طوارئ، أو أقرب حمّام.')}
+function askPerm(){
+ try{navigator.mediaDevices.getUserMedia({video:true,audio:true}).then(function(s){s.getTracks().forEach(function(t){t.stop()})}).catch(function(){$('said').textContent='لازم تسمح بالكاميرا والميكروفون من إعدادات المتصفح.'})}catch(e){}
+ try{navigator.geolocation&&navigator.geolocation.getCurrentPosition(function(p){S.pos=p.coords},function(){})}catch(e){}
+ setTimeout(function(){if(!voice)$('said').textContent='جهازك مفيهوش صوت عربي. نزّل صوت عربي (مصر) من إعدادات النطق في الجهاز.'},1500)}
+$('splash').onclick=function(){askPerm();show('login');say('أهلاً بيك في بصير. اكتب اسمك، أو دوس على الزرار الأخير وقول اسمك بصوتك.')};
+$('go').onclick=function(){S.name=$('nm').value||'';S.fam=$('fam').value||'';sv('user',{name:S.name,fam:S.fam});sv('fam',S.fam);enter()};
+$('guest').onclick=function(){S.fam=ld('fam','');enter()};
+$('vl').onclick=function(){say('قول اسمك.',function(){listen(function(t){S.name=t;$('nm').value=t;say('أهلاً يا '+t+'. دلوقتي اكتب رقم أهلك للطوارئ، وبعدين دوس دخول.')})})};
+$('loginVoice').onclick=function(){voiceLogin(0)};
+function voiceLogin(step){
+  if(step===0){say('قول اسمك',function(){listen(function(t){
+    var n=String(t||'').trim();
+    if(!n){say('ما سمعتش شي. قول اسمك تاني',function(){voiceLogin(0)});return}
+    S.name=n;$('nm').value=n;voiceLogin(1)})});}
+  else if(step===1){say('قول الرقم السري',function(){listen(function(t){
+    var p=String(t||'').trim();
+    if(!p){say('ما سمعتش شي. قول الرقم السري تاني',function(){voiceLogin(1)});return}
+    S.pw=$('pw').value=p;voiceLogin(2)})});}
+  else{say('قول رقم موبايل الأهل',function(){listen(function(t){
+    var n=toNum(t);
+    if(n.length<8){say('رقم مش كامل. قوله تاني',function(){voiceLogin(2)});return}
+    S.fam=n;$('fam').value=n;sv('user',{name:S.name,fam:S.fam,pw:S.pw});sv('fam',S.fam);enter()})});}
+}
+$('mic').onclick=function(){say('اتفضل',function(){listen(route)})};
+document.querySelectorAll('[data-a]').forEach(function(b){b.onclick=function(){act(b.dataset.a)}});
+</script>
+</body>
+</html>
